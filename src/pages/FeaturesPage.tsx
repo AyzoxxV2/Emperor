@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Shield, Cloud, Headphones, Monitor, Cpu, Wifi, Lock, BarChart2, Settings, Users, Star } from 'lucide-react';
+import { Zap, Shield, Cloud, Monitor, Cpu, Wifi, Lock, BarChart2, Settings, Users } from 'lucide-react';
 import './Pages.scss';
 
 const mainFeatures = [

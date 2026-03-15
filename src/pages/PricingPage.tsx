@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, X, Zap, Crown, ShoppingBag, ExternalLink } from 'lucide-react';

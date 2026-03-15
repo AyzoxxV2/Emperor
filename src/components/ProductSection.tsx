@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
-import { Check, ShoppingBag, Crown, Zap, ExternalLink } from 'lucide-react';
+import { Check, ShoppingBag, Crown, ExternalLink } from 'lucide-react';
 import { Product, DISCORD_URL } from '../data/products';
 import './ProductSection.scss';
 

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
-import type { User, Session } from '@supabase/supabase-js';
+import type { Session } from '@supabase/supabase-js';
 
 export interface Profile {
   id: string;
@@ -50,12 +50,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   const fetchProfile = useCallback(async (sbUser: User) => {
-    const { data } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', sbUser.id)
-      .single();
-    setUser(buildProfile(sbUser, data));
+    try {
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', sbUser.id)
+        .single();
+      setUser(buildProfile(sbUser, data));
+    } catch (e) {
+      // If profiles table doesn't exist yet, still set user from auth data
+      console.warn('[Emperor] Could not fetch profile, using auth data:', e);
+      setUser(buildProfile(sbUser, null));
+    }
   }, []);
 
   const refreshProfile = useCallback(async () => {
