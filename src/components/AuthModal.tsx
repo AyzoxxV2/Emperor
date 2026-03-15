@@ -47,31 +47,45 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, mode, onClose, onSwitchMo
     if (form.password.length < 6) { setError('Password must be at least 6 characters.'); return; }
 
     setLoading(true);
-    const result = isReg
-      ? await register(form.username.trim(), form.email, form.password)
-      : await login(form.email, form.password);
-    setLoading(false);
+    // Safety timeout — never hang forever
+    const timeout = setTimeout(() => {
+      setLoading(false);
+      setError('Request timed out. Please try again.');
+    }, 10000);
 
-    if (result.error) {
-      const msg = result.error
-        .replace('Invalid login credentials', 'Incorrect email or password.')
-        .replace('User already registered', 'An account with this email already exists.')
-        .replace('Email not confirmed', 'Please confirm your email before signing in.');
-      setError(msg);
-      return;
-    }
+    try {
+      const result = isReg
+        ? await register(form.username.trim(), form.email, form.password)
+        : await login(form.email, form.password);
+      clearTimeout(timeout);
+      setLoading(false);
 
-    if (isReg) {
-      // Show email pending screen
-      setSubmittedEmail(form.email);
-      setModalState('pending_email');
-    } else {
-      // Show brief success then close
-      setModalState('success_login');
-      toast.success(cfg.successLogin, { style: toastStyle });
-      await new Promise(r => setTimeout(r, 1000));
-      handleClose();
+      if (result.error) {
+        const msg = result.error
+          .replace('Invalid login credentials', 'Incorrect email or password.')
+          .replace('User already registered', 'An account with this email already exists.')
+          .replace('Email not confirmed', 'Please confirm your email before signing in.');
+        setError(msg);
+        return;
+      }
+
+      if (isReg) {
+        setSubmittedEmail(form.email);
+        setModalState('pending_email');
+      } else {
+        setModalState('success_login');
+        toast.success(cfg.successLogin, { style: toastStyle });
+        await new Promise(r => setTimeout(r, 1000));
+        handleClose();
+      }
+    } catch (e: any) {
+      clearTimeout(timeout);
+      setLoading(false);
+      setError(e?.message || 'Something went wrong. Please try again.');
     }
+    return; // prevent double execution of old code below
+    // eslint-disable-next-line no-unreachable
+    
   };
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>

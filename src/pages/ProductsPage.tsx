@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ShoppingBag, Crown, ExternalLink } from 'lucide-react';
+import { Check, ShoppingBag, Crown, ExternalLink, Zap, Star } from 'lucide-react';
 import { products, Product } from '../data/products';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
