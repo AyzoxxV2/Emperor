@@ -179,10 +179,10 @@ const BottomSections: React.FC = () => {
                 </svg>
                 Discord
               </a>
-              <a href="/#" className="efooter__social">
+              <a href="#" className="efooter__social">
                 <Twitter size={16} /> Twitter
               </a>
-              <a href="/#" className="efooter__social">
+              <a href="#" className="efooter__social">
                 <Github size={16} /> GitHub
               </a>
             </div>
@@ -194,8 +194,8 @@ const BottomSections: React.FC = () => {
               <a href="/products" className="efooter__link">Products</a>
               <a href="/features" className="efooter__link">Features</a>
               <a href="/pricing" className="efooter__link">Pricing</a>
-              <button className="efooter__link">Changelog</a>
-              <button className="efooter__link">Roadmap</a>
+              <button className="efooter__link">Changelog</button>
+              <button className="efooter__link">Roadmap</button>
             </div>
             <div className="efooter__links-col">
               <div className="efooter__links-title">Support</div>
@@ -204,15 +204,15 @@ const BottomSections: React.FC = () => {
                 Discord <ExternalLink size={10} />
               </a>
               <a href="mailto:support@emperor.gg" className="efooter__link">Email Us</a>
-              <button className="efooter__link">Status</a>
-              <button className="efooter__link">Report a Bug</a>
+              <button className="efooter__link">Status</button>
+              <button className="efooter__link">Report a Bug</button>
             </div>
             <div className="efooter__links-col">
               <div className="efooter__links-title">Legal</div>
-              <button className="efooter__link">Terms of Service</a>
-              <button className="efooter__link">Privacy Policy</a>
-              <button className="efooter__link">Cookie Policy</a>
-              <button className="efooter__link">Refund Policy</a>
+              <button className="efooter__link">Terms of Service</button>
+              <button className="efooter__link">Privacy Policy</button>
+              <button className="efooter__link">Cookie Policy</button>
+              <button className="efooter__link">Refund Policy</button>
             </div>
           </div>
         </div>
