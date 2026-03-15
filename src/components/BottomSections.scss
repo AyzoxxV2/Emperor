@@ -1,0 +1,193 @@
+@use '../styles/variables' as *;
+
+// ── Features ──────────────────────────────────
+.efeatures {
+  padding: 100px 0;
+  background: var(--surface);
+  position: relative;
+  &::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+  }
+  &__container { max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px,5vw,80px); }
+  &__header { margin-bottom: 56px; }
+  &__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px; }
+}
+
+.efeat-card {
+  padding: 28px 24px;
+  background: var(--glass-bg); border: 1px solid var(--border); border-radius: var(--r-md);
+  cursor: none;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+  &:hover { border-color: var(--gold-border); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
+  &__icon {
+    width: 52px; height: 52px; background: rgba(232,168,0,0.08); border: 1px solid var(--gold-border);
+    border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; color: var(--gold);
+    margin-bottom: 18px; clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+    transition: background var(--t-base);
+    .efeat-card:hover & { background: rgba(232,168,0,0.14); }
+  }
+  &__title { font-family: $font-display; font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 10px; }
+  &__desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+}
+
+// ── Testimonials ──────────────────────────────
+.testimonials {
+  padding: 100px 0;
+  &__container { max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px,5vw,80px); }
+  &__header { margin-bottom: 56px; }
+  &__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+}
+
+.testi-card {
+  padding: 28px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-lg); display: flex; flex-direction: column; gap: 14px;
+  transition: border-color var(--t-base), transform var(--t-base); cursor: none;
+  &:hover { border-color: var(--gold-border); }
+  &__stars { font-size: 0.9rem; letter-spacing: 2px; }
+  &__text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; font-style: italic; flex: 1; }
+  &__author { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--border); }
+  &__avatar { font-size: 1.8rem; }
+  &__name { font-family: $font-display; font-size: 0.9rem; font-weight: 600; }
+  &__product { font-family: $font-mono; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold); margin-top: 2px; }
+}
+
+// ── FAQ ───────────────────────────────────────
+.efaq-section {
+  padding: 100px 0;
+  &__container { max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px,5vw,80px); }
+  &__layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start;
+    @media (max-width: 900px) { grid-template-columns: 1fr; } }
+  &__left { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; }
+  &__sub { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; font-weight: 300; }
+  &__discord { width: fit-content; font-size: 0.88rem; padding: 12px 22px; text-decoration: none; }
+  &__banner { width: 100%; border-radius: var(--r-md); opacity: 0.85; margin-top: 8px;
+    @media (max-width: 900px) { display: none; } }
+  &__right { display: flex; flex-direction: column; }
+}
+
+.efaq-item {
+  border-bottom: 1px solid var(--border);
+  transition: border-color var(--t-fast);
+  &--open { border-color: var(--gold-border); }
+  &__q {
+    width: 100%; padding: 18px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: none; border: none; cursor: none; text-align: left;
+    font-family: $font-ui; font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); transition: color var(--t-fast);
+    &:hover { color: var(--text-primary); }
+    .efaq-item--open & { color: var(--gold); }
+    svg { flex-shrink: 0; color: var(--gold); }
+  }
+  &__a { overflow: hidden;
+    p { padding-bottom: 18px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; font-weight: 300; }
+  }
+}
+
+// ── CTA Banner ────────────────────────────────
+.ecta-banner {
+  padding: 0 clamp(20px,5vw,80px) 80px;
+  &__inner {
+    border-radius: var(--r-xl); border: 1px solid var(--gold-border);
+    background: var(--surface-2); padding: clamp(50px,8vw,90px) clamp(30px,5vw,80px);
+    position: relative; overflow: hidden; text-align: center;
+  }
+  &__glow {
+    position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 300px;
+    background: radial-gradient(circle, rgba(232,168,0,0.12) 0%, transparent 70%); pointer-events: none;
+  }
+  &__content {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    p { color: var(--text-secondary); font-size: 1rem; }
+  }
+  &__ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  &__btn { padding: 14px 28px; font-size: 0.95rem; text-decoration: none; }
+}
+
+// ── Footer ────────────────────────────────────
+.efooter {
+  border-top: 1px solid var(--border);
+  background: var(--void);
+
+  &__top {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 60px;
+    max-width: 1400px; margin: 0 auto;
+    padding: 60px clamp(20px,5vw,80px) 48px;
+    @media (max-width: 900px) { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  &__brand-col { display: flex; flex-direction: column; gap: 20px; }
+
+  &__brand { display: flex; align-items: center; gap: 12px; }
+
+  &__avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1.5px solid var(--gold-border); object-fit: cover; flex-shrink: 0;
+  }
+
+  &__name {
+    font-family: $font-display; font-size: 1.3rem; letter-spacing: 0.14em;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  &__sub { font-family: $font-mono; font-size: 0.58rem; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  &__desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; max-width: 320px; }
+
+  &__socials { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  &__social {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--r-sm);
+    font-size: 0.8rem; color: var(--text-secondary); text-decoration: none;
+    font-family: $font-ui; font-weight: 600; cursor: none;
+    transition: var(--t-fast); background: none;
+    clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+
+    &:hover { border-color: var(--gold-border); color: var(--text-primary); background: rgba(232,168,0,0.05); }
+
+    &--discord {
+      border-color: rgba(88,101,242,0.4); color: #7289da;
+      background: rgba(88,101,242,0.06);
+      &:hover { border-color: #7289da; background: rgba(88,101,242,0.12); color: #7289da; }
+    }
+  }
+
+  &__links-cols {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    @media (max-width: 600px) { grid-template-columns: 1fr 1fr; }
+  }
+
+  &__links-col { display: flex; flex-direction: column; gap: 10px; }
+
+  &__links-title {
+    font-family: $font-mono; font-size: 0.62rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+  }
+
+  &__link {
+    font-size: 0.83rem; color: var(--text-muted); text-decoration: none;
+    cursor: none; transition: color var(--t-fast); font-family: $font-ui;
+    display: inline-flex; align-items: center; gap: 5px; background: none; border: none; text-align: left;
+    &:hover { color: var(--text-primary); }
+  }
+
+  &__bottom {
+    border-top: 1px solid var(--border);
+    max-width: 1400px; margin: 0 auto;
+    padding: 20px clamp(20px,5vw,80px);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+
+  &__copy { font-size: 0.72rem; color: var(--text-muted); }
+
+  &__badges { display: flex; gap: 16px; }
+
+  &__badge {
+    font-family: $font-mono; font-size: 0.6rem; letter-spacing: 0.08em;
+    color: var(--text-muted); display: flex; align-items: center; gap: 4px;
+  }
+}

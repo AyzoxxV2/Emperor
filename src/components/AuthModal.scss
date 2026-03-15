@@ -1,0 +1,369 @@
+@use '../styles/variables' as *;
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,2,6,0.8);
+  backdrop-filter: blur(10px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-modal {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 60px rgba(212,175,55,0.08);
+
+  &__glow {
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: none;
+    transition: var(--t-fast);
+    background: none;
+
+    &:hover { border-color: var(--border-gold); color: var(--text-primary); }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+
+    span {
+      font-family: $font-display;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      background: linear-gradient(135deg, #f0d060, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 28px;
+
+    h2 {
+      font-family: $font-display;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    p { color: var(--text-secondary); font-size: 0.88rem; }
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  &__forgot {
+    font-size: 0.78rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: block;
+    text-align: right;
+    cursor: none;
+    opacity: 0.8;
+    transition: opacity var(--t-fast);
+    background: none;
+    border: none;
+    font-family: inherit;
+
+    &:hover { opacity: 1; }
+  }
+
+  &__submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--gold-300), var(--gold), var(--gold-600));
+    color: var(--black);
+    border-radius: var(--r-full);
+    font-family: $font-display;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: none;
+    box-shadow: 0 6px 24px rgba(212,175,55,0.3);
+    margin-bottom: 16px;
+    border: none;
+    transition: box-shadow var(--t-base);
+
+    &:hover:not(:disabled) { box-shadow: 0 10px 36px rgba(212,175,55,0.45); }
+    &:disabled { opacity: 0.75; cursor: wait; }
+  }
+
+  &__spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: var(--black);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  &__switch {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    button {
+      color: var(--gold);
+      cursor: none;
+      font-family: inherit;
+      font-size: inherit;
+      background: none;
+      border: none;
+      font-weight: 600;
+      transition: opacity var(--t-fast);
+      &:hover { opacity: 0.8; }
+    }
+  }
+
+  &__divider {
+    text-align: center;
+    position: relative;
+    margin-bottom: 16px;
+
+    span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      padding: 0 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      height: 1px;
+      background: var(--border);
+    }
+  }
+
+  &__socials {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__social-btn {
+    flex: 1;
+    padding: 11px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--glass-bg);
+    color: var(--text-secondary);
+    font-family: $font-ui;
+    font-size: 0.82rem;
+    cursor: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: var(--t-fast);
+
+    &:hover { border-color: var(--border-gold); color: var(--text-primary); background: rgba(212,175,55,0.04); }
+  }
+
+  // Success state
+  &__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 32px 0;
+
+    h3 {
+      font-family: $font-display;
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f0d060, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p { color: var(--text-secondary); font-size: 0.9rem; }
+  }
+
+  &__success-ring {
+    filter: drop-shadow(0 0 20px rgba(212,175,55,0.4));
+  }
+}
+
+// Field
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  &__wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 12px 42px 12px 40px;
+      font-family: $font-ui;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color var(--t-fast), box-shadow var(--t-fast);
+
+      &::placeholder { color: var(--text-muted); }
+      &:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(212,175,55,0.08);
+      }
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: 14px;
+    color: var(--text-muted);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__toggle {
+    position: absolute;
+    right: 12px;
+    color: var(--text-muted);
+    cursor: none;
+    display: flex;
+    transition: color var(--t-fast);
+    background: none;
+    border: none;
+
+    &:hover { color: var(--text-primary); }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.auth-modal__error {
+  background: rgba(255,0,0,0.08);
+  border: 1px solid rgba(255,0,0,0.25);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #ff6b6b;
+  font-family: $font-ui;
+}
+
+// ── Pending email screen ──────────────────────
+.auth-modal__pending {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 14px; padding: 8px 0;
+
+  h3 {
+    font-family: $font-display; font-size: 1.5rem; letter-spacing: 0.04em;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  p { font-size: 0.88rem; color: var(--text-secondary); }
+}
+
+.auth-modal__pending-icon {
+  font-size: 3.5rem;
+  animation: emailBounce 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(232,168,0,0.4));
+}
+
+.auth-modal__pending-email {
+  font-family: $font-mono; font-size: 0.82rem;
+  color: var(--gold-bright); padding: 8px 20px;
+  background: rgba(232,168,0,0.08);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--r-sm);
+  word-break: break-all;
+}
+
+.auth-modal__pending-note {
+  font-size: 0.8rem; color: var(--text-secondary);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  display: flex; align-items: flex-start; gap: 8px; text-align: left;
+}
+
+.auth-modal__pending-tip {
+  font-size: 0.75rem; color: var(--text-muted);
+  font-family: $font-mono; letter-spacing: 0.04em;
+}
+
+.auth-modal__pending-close {
+  width: 100%; justify-content: center;
+  padding: 13px; font-size: 0.9rem;
+}
+
+.auth-modal__pending-resend {
+  font-size: 0.78rem; color: var(--gold);
+  background: none; border: none; cursor: none;
+  font-family: $font-ui; opacity: 0.7;
+  transition: opacity var(--t-fast);
+  &:hover { opacity: 1; }
+}
+
+@keyframes emailBounce {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}

@@ -1,0 +1,134 @@
+@use '../styles/variables' as *;
+
+.emp-loader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000; overflow: hidden;
+
+  &__grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,168,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,168,0,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridPulse 3s ease-in-out infinite;
+  }
+
+  &__scan {
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.8), transparent);
+    pointer-events: none; z-index: 2;
+  }
+
+  &__corner {
+    position: absolute; width: 36px; height: 36px;
+    &--tl { top: 20px; left: 20px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    &--tr { top: 20px; right: 20px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+    &--bl { bottom: 20px; left: 20px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    &--br { bottom: 20px; right: 20px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  }
+
+  &__center {
+    position: relative; z-index: 3;
+    display: flex; flex-direction: column; align-items: center; gap: 32px;
+  }
+
+  &__logo { display: flex; justify-content: center; }
+
+  &__avatar {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-border);
+    box-shadow: 0 0 40px rgba(232,168,0,0.4), 0 0 80px rgba(232,168,0,0.15);
+    object-fit: cover;
+  }
+
+  &__brand { display: flex; justify-content: center; }
+
+  &__welcome-img {
+    max-width: min(500px, 85vw);
+    filter: drop-shadow(0 0 20px rgba(232,168,0,0.5));
+    animation: imgPulse 2s ease-in-out infinite;
+  }
+
+  &__progress-wrap {
+    width: min(420px, 80vw);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  &__bar {
+    height: 3px; background: rgba(255,255,255,0.06);
+    position: relative; overflow: visible;
+    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  }
+
+  &__bar-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-bright));
+    box-shadow: 0 0 10px var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  &__bar-glow {
+    position: absolute; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px; height: 10px;
+    background: white; border-radius: 50%;
+    box-shadow: 0 0 10px white, 0 0 20px var(--gold-bright);
+  }
+
+  &__labels {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  &__status {
+    font-family: $font-mono; font-size: 0.58rem;
+    letter-spacing: 0.14em; color: var(--text-muted);
+  }
+
+  &__pct {
+    font-family: $font-mono; font-size: 0.75rem;
+    letter-spacing: 0.1em; color: var(--gold);
+    font-weight: 700;
+  }
+
+  &__nodes {
+    display: flex; align-items: center; gap: 0;
+  }
+
+  &__node {
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 1.5px solid rgba(232,168,0,0.3);
+    transition: all 0.3s ease; flex-shrink: 0;
+    &.active {
+      background: var(--gold); border-color: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+      transform: scale(1.2);
+    }
+  }
+
+  &__connector {
+    width: 32px; height: 1px;
+    background: rgba(232,168,0,0.15); flex-shrink: 0;
+    &.active { background: var(--gold); box-shadow: 0 0 4px var(--gold); }
+  }
+
+  // Wipe reveal
+  &__wipe {
+    position: absolute; left: 0; right: 0;
+    background: var(--black); z-index: 10;
+    &--top { top: 0; height: 50%; transform-origin: top center; }
+    &--bottom { bottom: 0; height: 50%; transform-origin: bottom center; }
+  }
+}
+
+@keyframes gridPulse {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes imgPulse {
+  0%,100% { filter: drop-shadow(0 0 20px rgba(232,168,0,0.5)); }
+  50% { filter: drop-shadow(0 0 35px rgba(255,215,0,0.8)); }
+}

@@ -1,0 +1,230 @@
+@use '../styles/variables' as *;
+
+.eproducts {
+  height: 580vh;
+  position: relative;
+
+  &__sticky {
+    position: sticky; top: 0; height: 100vh;
+    display: flex; flex-direction: column;
+    overflow: hidden; padding-top: var(--nav-h);
+    background: var(--black);
+  }
+
+  &__header {
+    padding: 32px clamp(20px,5vw,80px) 20px;
+    flex-shrink: 0;
+
+    h2 { margin-bottom: 8px; }
+  }
+
+  &__sub {
+    color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  &__dots {
+    display: flex; gap: 8px; align-items: center;
+  }
+
+  &__dot {
+    width: 6px; height: 6px; border-radius: 1px;
+    background: var(--border);
+    transition: all 0.4s ease;
+    clip-path: polygon(2px 0%,100% 0%,calc(100% - 2px) 100%,0% 100%);
+
+    &.active {
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+      width: 20px;
+    }
+  }
+
+  &__viewport {
+    flex: 1; overflow: hidden;
+    padding: 0 clamp(20px,5vw,80px);
+  }
+
+  &__track {
+    display: flex; gap: 20px; height: 100%;
+    align-items: center; will-change: transform;
+  }
+
+  &__progress {
+    height: 2px; background: rgba(255,255,255,0.04); flex-shrink: 0;
+    transform-origin: left;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold), var(--gold-bright));
+    transform-origin: left;
+    box-shadow: 0 0 10px var(--gold);
+  }
+}
+
+// ── Pricing card ──────────────────────────────
+.ecard {
+  flex-shrink: 0;
+  width: clamp(260px, 30vw, 340px);
+  height: clamp(500px, 72vh, 620px);
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  position: relative; overflow: hidden;
+  cursor: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent, var(--gold)), transparent);
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    border-color: rgba(232,168,0,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    &::before { opacity: 1; }
+  }
+
+  &--popular {
+    border-color: var(--gold-border);
+    background: linear-gradient(160deg, var(--surface-2) 0%, var(--surface) 100%);
+    box-shadow: 0 0 40px rgba(232,168,0,0.1);
+
+    &::before { opacity: 1; }
+  }
+
+  &__popular-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232,168,0,0.12) 0%, transparent 60%);
+  }
+
+  &__header {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  }
+
+  &__icon-wrap {
+    width: 52px; height: 52px; border-radius: var(--r-sm);
+    background: rgba(232,168,0,0.08);
+    border: 1px solid var(--gold-border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+  }
+
+  &__icon { font-size: 1.6rem; }
+
+  &__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+
+  &__badge { font-size: 0.58rem; }
+
+  &__category { text-align: right; }
+
+  &__name {
+    font-family: $font-display;
+    font-size: 1.5rem; letter-spacing: 0.06em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  &__tagline {
+    font-size: 0.8rem; color: var(--text-secondary);
+    line-height: 1.5; font-weight: 400; flex-shrink: 0;
+  }
+
+  &__price-wrap {
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  }
+
+  &__price {
+    font-family: $font-display; font-size: 2.2rem;
+    letter-spacing: 0.04em;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+
+    &--free {
+      font-size: 1.6rem;
+      background: linear-gradient(180deg, #00FF87, #00C060);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__period {
+    font-family: $font-mono; font-size: 0.7rem;
+    color: var(--text-muted); letter-spacing: 0.08em;
+  }
+
+  &__original {
+    font-family: $font-mono; font-size: 0.75rem;
+    color: var(--text-muted); text-decoration: line-through;
+  }
+
+  &__divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+    flex-shrink: 0;
+  }
+
+  &__features {
+    flex: 1; display: flex; flex-direction: column; gap: 8px;
+    overflow: hidden;
+  }
+
+  &__feature {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;
+  }
+
+  &__check {
+    color: var(--gold); flex-shrink: 0; margin-top: 1px;
+    .ecard--popular & { color: var(--gold-bright); }
+  }
+
+  &__cta {
+    width: 100%; justify-content: center;
+    font-size: 0.9rem; padding: 13px;
+    flex-shrink: 0; margin-top: auto;
+
+    &--adding { background: linear-gradient(135deg, #00C060, #00FF87) !important; color: var(--black) !important; }
+  }
+}
+
+// Free plan additions
+.ecard__free-banner {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: linear-gradient(90deg, rgba(0,255,135,0.15), transparent);
+  border-bottom: 1px solid rgba(0,255,135,0.2);
+  font-family: $font-mono; font-size: 0.6rem; letter-spacing: 0.12em;
+  color: var(--green); padding: 5px 14px;
+}
+
+.ecard--active {
+  border-color: var(--accent, var(--gold)) !important;
+  box-shadow: 0 0 40px rgba(0,0,0,0.3);
+  transform: scale(1.02);
+}
+
+.ecard__cta--discord {
+  background: linear-gradient(135deg, #5865F2, #4752c4) !important;
+  color: white !important;
+  border: none !important;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  width: 100%; justify-content: center;
+  font-size: 0.9rem; padding: 13px;
+  font-family: $font-display; letter-spacing: 0.06em;
+  cursor: none; display: flex; align-items: center; gap: 8px;
+  border-radius: var(--r-sm); transition: var(--t-base);
+  &:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(88,101,242,0.4); }
+}
+
+.ecard__discord-note {
+  text-align: center; font-family: $font-mono; font-size: 0.58rem;
+  color: var(--text-muted); letter-spacing: 0.08em; margin-top: -4px;
+}

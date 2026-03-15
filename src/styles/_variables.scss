@@ -1,0 +1,57 @@
+// ═══════════════════════════════════════════
+// EMPEROR — Design Tokens
+// ═══════════════════════════════════════════
+
+:root {
+  // Core
+  --black:     #050505;
+  --void:      #080808;
+  --surface:   #0e0e0e;
+  --surface-2: #141414;
+  --surface-3: #1a1a1a;
+
+  // Emperor Gold
+  --gold-bright: #FFD700;
+  --gold:        #E8A800;
+  --gold-deep:   #B87800;
+  --gold-dim:    rgba(232,168,0,0.15);
+  --gold-border: rgba(232,168,0,0.35);
+
+  // Red accent (from logo shadow)
+  --red:     #8B0000;
+  --red-mid: #C41E00;
+
+  // Text
+  --text-primary:   #FFFFFF;
+  --text-secondary: rgba(255,255,255,0.6);
+  --text-muted:     rgba(255,255,255,0.28);
+
+  // UI
+  --border:     rgba(255,255,255,0.06);
+  --glass-bg:   rgba(255,255,255,0.03);
+  --glass-blur: 16px;
+
+  // Status
+  --green:  #00FF87;
+  --cyan:   #00D4FF;
+
+  // Nav
+  --nav-h: 68px;
+
+  // Radius
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   14px;
+  --r-xl:   24px;
+  --r-full: 9999px;
+
+  // Transitions
+  --t-fast:   0.15s cubic-bezier(0.4,0,0.2,1);
+  --t-base:   0.3s cubic-bezier(0.4,0,0.2,1);
+  --t-slow:   0.6s cubic-bezier(0.4,0,0.2,1);
+  --t-spring: 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+$font-display: 'Bebas Neue', cursive;
+$font-ui:      'Rajdhani', sans-serif;
+$font-mono:    'Share Tech Mono', monospace;
