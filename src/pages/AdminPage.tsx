@@ -93,6 +93,13 @@ const AdminPage: React.FC = () => {
     toast.success(isAdmin ? 'Admin granted' : 'Admin removed', { style: toastStyle });
   };
 
+  const changePlan = async (userId: string, plan: string) => {
+    const { error } = await supabase.from('profiles').update({ plan }).eq('id', userId);
+    if (error) { toast.error('Failed to update plan', { style: toastStyle }); return; }
+    setUsers(prev => prev.map(u => u.id === userId ? { ...u, plan } : u));
+    toast.success(`Plan updated to ${plan.toUpperCase()}`, { style: toastStyle });
+  };
+
   const statCards = [
     { label: 'Total Users', value: stats.totalUsers, icon: <Users size={22} />, color: '#00D4FF' },
     { label: 'Total Vouchers', value: stats.totalVouchers, icon: <Star size={22} />, color: '#FFD700' },
@@ -246,6 +253,15 @@ const AdminPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="admin__user-actions">
+                  <select
+                    className="admin__plan-select"
+                    value={u.plan}
+                    onChange={e => changePlan(u.id, e.target.value)}
+                  >
+                    {['free', 'pro', 'elite', 'lifetime'].map(p => (
+                      <option key={p} value={p}>{p.toUpperCase()}</option>
+                    ))}
+                  </select>
                   {u.id !== user.id && (
                     <button
                       className={`admin__btn ${u.is_admin ? 'admin__btn--hide' : 'admin__btn--approve'}`}

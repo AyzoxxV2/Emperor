@@ -222,3 +222,21 @@
   // Overview
   &__overview { display: flex; flex-direction: column; gap: 32px; }
 }
+
+.admin__plan-select {
+  background: var(--surface-2);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--r-sm);
+  color: var(--gold);
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 6px 10px;
+  cursor: none;
+  outline: none;
+  transition: var(--t-fast);
+  
+  option { background: var(--surface-2); color: var(--text-primary); }
+  &:hover { border-color: var(--gold); }
+  &:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(232,168,0,0.1); }
+}

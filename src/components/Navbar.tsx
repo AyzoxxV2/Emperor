@@ -5,6 +5,7 @@ import { User, Menu, X, Zap, LogOut, Crown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../config/content';
 import { useAuth } from '../context/AuthContext';
+import NotifBell from './NotifBell';
 import './Navbar.scss';
 
 interface NavbarProps {
@@ -52,6 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAuthOpen }) => {
         </ul>
 
         <div className="enav__actions">
+          <NotifBell />
           {isAuthenticated && user ? (
             <div className="enav__user-wrap">
               <button className="enav__user-btn" onClick={() => setUserMenuOpen(!userMenuOpen)}>
@@ -71,6 +73,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAuthOpen }) => {
                       <div className="enav__user-menu-name">{user.name}</div>
                       <div className="enav__user-menu-email">{user.email}</div>
                     </div>
+                    <Link to="/profile" className="enav__user-menu-item" onClick={() => setUserMenuOpen(false)} style={{marginBottom: 0}}>
+                      <User size={14} /> My Profile
+                    </Link>
                     <Link to="/dashboard" className="enav__user-menu-item" onClick={() => setUserMenuOpen(false)}>
                       <Crown size={14} /> Dashboard
                     </Link>

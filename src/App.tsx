@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -5,6 +6,8 @@ import { Toaster } from 'react-hot-toast';
 import './styles/globals.scss';
 
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
+import { NotifProvider } from './context/NotifContext';
 
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
@@ -18,9 +21,10 @@ import SupportPage from './pages/SupportPage';
 import DashboardPage from './pages/DashboardPage';
 import VouchersPage from './pages/VouchersPage';
 import AdminPage from './pages/AdminPage';
+import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 
-// ── Custom Cursor ──────────────────────────────
+// Custom cursor
 const Cursor: React.FC = () => {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -65,7 +69,7 @@ const Cursor: React.FC = () => {
   );
 };
 
-// ── Page transition ────────────────────────────
+// Page transition
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
   return (
@@ -82,17 +86,15 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
-// ── Inner app (needs router context) ──────────
+// Inner app
 const InnerApp: React.FC = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
-
   const openAuth = (mode: 'login' | 'register') => { setAuthMode(mode); setAuthOpen(true); };
 
   return (
     <>
       <Navbar onAuthOpen={openAuth} />
-
       <PageWrapper>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -103,13 +105,12 @@ const InnerApp: React.FC = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/vouchers" element={<VouchersPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </PageWrapper>
-
       <AuthModal
-        isOpen={authOpen}
-        mode={authMode}
+        isOpen={authOpen} mode={authMode}
         onClose={() => setAuthOpen(false)}
         onSwitchMode={m => setAuthMode(m)}
       />
@@ -117,13 +118,15 @@ const InnerApp: React.FC = () => {
   );
 };
 
-// ── Root ───────────────────────────────────────
+// Root
 const App: React.FC = () => {
   const [loaded, setLoaded] = useState(false);
 
   return (
     <AuthProvider>
-      <Cursor />
+      <CartProvider>
+        <NotifProvider>
+          <Cursor />
           <div className="noise-overlay" />
           <Toaster position="bottom-right" />
 
@@ -140,7 +143,8 @@ const App: React.FC = () => {
               </motion.div>
             )}
           </AnimatePresence>
-
+        </NotifProvider>
+      </CartProvider>
     </AuthProvider>
   );
 };
