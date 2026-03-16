@@ -5,6 +5,7 @@ import { X, Mail, ArrowRight, RefreshCw } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import toast from 'react-hot-toast';
 import './OTPModal.scss';
+import { SITE_CONFIG } from '../config/content';
 
 interface OTPModalProps {
   isOpen: boolean;
@@ -82,7 +83,7 @@ const OTPModal: React.FC<OTPModalProps> = ({ isOpen, email, onSuccess, onClose }
       inputs.current[0]?.focus();
       return;
     }
-    toast.success('Verified! Welcome back ⚡', { style: toastStyle });
+    toast.success(SITE_CONFIG.auth.otp.successMessage, { style: toastStyle });
     onSuccess();
   };
 
@@ -119,7 +120,7 @@ const OTPModal: React.FC<OTPModalProps> = ({ isOpen, email, onSuccess, onClose }
             <button className="otp-modal__close" onClick={onClose}><X size={16} /></button>
 
             <div className="otp-modal__logo">
-              <img src="/emperor/emperor_bot_avatar_ani.gif" alt="Emperor"
+              <img src={SITE_CONFIG.brand.logoGif} alt="Emperor"
                 style={{ width: 32, height: 32, borderRadius: '50%', border: '1.5px solid rgba(232,168,0,0.4)' }} />
               <span>EMPEROR</span>
             </div>
@@ -129,8 +130,8 @@ const OTPModal: React.FC<OTPModalProps> = ({ isOpen, email, onSuccess, onClose }
             </div>
 
             <div className="otp-modal__heading">
-              <h2>Check your email</h2>
-              <p>We sent a 6-digit code to</p>
+              <h2>{SITE_CONFIG.auth.otp.title}</h2>
+              <p>{SITE_CONFIG.auth.otp.subtitle}</p>
               <div className="otp-modal__email">{email}</div>
             </div>
 
@@ -161,22 +162,22 @@ const OTPModal: React.FC<OTPModalProps> = ({ isOpen, email, onSuccess, onClose }
             >
               {loading
                 ? <div className="otp-modal__spinner" />
-                : <>Verify <ArrowRight size={15} /></>
+                : <>{SITE_CONFIG.auth.otp.verifyLabel} <ArrowRight size={15} /></>
               }
             </motion.button>
 
             <div className="otp-modal__resend">
               {canResend ? (
                 <button onClick={handleResend}>
-                  <RefreshCw size={13} /> Resend code
+                  <RefreshCw size={13} /> {SITE_CONFIG.auth.otp.resendLabel}
                 </button>
               ) : (
-                <span>Resend code in <strong>{countdown}s</strong></span>
+                <span>{SITE_CONFIG.auth.otp.resendCountdown} <strong>{countdown}s</strong></span>
               )}
             </div>
 
             <p className="otp-modal__note">
-              Check your spam folder if you don't see it.
+              {SITE_CONFIG.auth.otp.spamNote}
             </p>
           </motion.div>
         </motion.div>

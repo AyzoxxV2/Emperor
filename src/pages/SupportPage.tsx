@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, MessageCircle, ChevronDown, ExternalLink, Zap, Shield, Cloud, Monitor } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { SITE_CONFIG } from '../config/content';
 import './Pages.scss';
 
 interface Message {
@@ -13,17 +14,7 @@ interface Message {
 
 const getTime = () => new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
-const botReplies: Record<string, string> = {
-  default: "Thanks for reaching out! Our support team will get back to you within 2 hours. In the meantime, check our FAQ below or join our Discord server for instant community help.",
-  launch: "To fix launcher issues: 1) Run as Administrator 2) Disable antivirus temporarily 3) Reinstall Emperor. If it persists, share your error log in Discord and we'll fix it fast.",
-  fps: "For FPS issues: make sure Booster PRO is enabled and set to 'Gaming Mode'. Check that no background apps are stealing resources. Our AI optimizer runs automatically when you launch a game.",
-  cloud: "Cloud saves sync automatically every 5 minutes while a game is running. To force a sync, go to Settings → Cloud → Sync Now. Make sure you're logged in with the same account.",
-  billing: "For billing questions, email billing@emperor.gg or open a ticket in our Discord. We have a 30-day money-back guarantee — no questions asked.",
-  discord: "Join our Discord server: discord.gg/TjXbYS9DZu — our community and support team are active 24/7. Most issues get solved within minutes there!",
-  hello: "Hey! 👋 Welcome to Emperor Support. How can I help you today? You can ask me about the launcher, FPS, cloud saves, billing, or anything else.",
-  hi: "Hey! 👋 Welcome to Emperor Support. How can I help you today?",
-  help: "Of course! I'm here to help. Common topics: launcher issues, FPS optimization, cloud saves, billing, or Discord. What's your question?",
-};
+const botReplies = SITE_CONFIG.supportPage.botReplies as Record<string, string>;
 
 const getBotReply = (msg: string): string => {
   const lower = msg.toLowerCase();
@@ -47,7 +38,7 @@ const faqItems = [
 const SupportPage: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, from: 'bot', text: "👋 Welcome to Emperor Support! I'm your AI assistant. Ask me anything — or join our Discord for live help.", time: getTime() }
+    { id: 1, from: 'bot', text: SITE_CONFIG.supportPage.botWelcome, time: getTime() }
   ]);
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
@@ -80,9 +71,9 @@ const SupportPage: React.FC = () => {
         <motion.div className="page__hero-content"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         >
-          <div className="badge badge--gold">24/7 Support</div>
-          <h1 className="display-xl">We've got you <span className="gold-text">covered</span></h1>
-          <p>AI support available instantly. Human support in under 2 hours.</p>
+          <div className="badge badge--gold">{SITE_CONFIG.supportPage.badge}</div>
+          <h1 className="display-xl">{SITE_CONFIG.supportPage.title} <span className="gold-text">{SITE_CONFIG.supportPage.titleGold}</span></h1>
+          <p>{SITE_CONFIG.supportPage.subtitle}</p>
         </motion.div>
       </div>
 
@@ -91,12 +82,12 @@ const SupportPage: React.FC = () => {
           {/* Chat */}
           <div className="support-page__chat-wrap">
             <div className="support-page__chat-header">
-              <img src="/emperor/emperor_bot_avatar_ani.gif" alt="Emperor Bot" className="support-page__bot-avatar" />
+              <img src={SITE_CONFIG.brand.logoGif} alt="Emperor Bot" className="support-page__bot-avatar" />
               <div>
-                <div className="support-page__bot-name">Emperor Support Bot</div>
-                <div className="support-page__bot-status"><span className="support-page__online-dot" /> Online — replies instantly</div>
+                <div className="support-page__bot-name">{SITE_CONFIG.supportPage.botName}</div>
+                <div className="support-page__bot-status"><span className="support-page__online-dot" /> {SITE_CONFIG.supportPage.botStatus}</div>
               </div>
-              <a href="https://discord.gg/TjXbYS9DZu" target="_blank" rel="noopener noreferrer" className="btn btn--outline support-page__discord-btn">
+              <a href={SITE_CONFIG.links.discord} target="_blank" rel="noopener noreferrer" className="btn btn--outline support-page__discord-btn">
                 <ExternalLink size={13} /> Discord
               </a>
             </div>
@@ -111,7 +102,7 @@ const SupportPage: React.FC = () => {
                     transition={{ duration: 0.3 }}
                   >
                     {msg.from === 'bot' && (
-                      <img src="/emperor/emperor_bot_avatar_ani.gif" alt="bot" className="support-page__msg-avatar" />
+                      <img src={SITE_CONFIG.brand.logoGif} alt="bot" className="support-page__msg-avatar" />
                     )}
                     {msg.from === 'user' && isAuthenticated && user && (
                       <img src={user.avatar} alt="you" className="support-page__msg-avatar support-page__msg-avatar--user" />
@@ -126,7 +117,7 @@ const SupportPage: React.FC = () => {
 
               {typing && (
                 <motion.div className="support-page__msg support-page__msg--bot" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                  <img src="/emperor/emperor_bot_avatar_ani.gif" alt="bot" className="support-page__msg-avatar" />
+                  <img src={SITE_CONFIG.brand.logoGif} alt="bot" className="support-page__msg-avatar" />
                   <div className="support-page__typing">
                     <span /><span /><span />
                   </div>
@@ -178,19 +169,19 @@ const SupportPage: React.FC = () => {
 
             <div className="support-page__section">
               <h3 className="support-page__section-title">🔗 Get Help Faster</h3>
-              <a href="https://discord.gg/TjXbYS9DZu" target="_blank" rel="noopener noreferrer" className="support-page__link-card">
+              <a href={SITE_CONFIG.links.discord} target="_blank" rel="noopener noreferrer" className="support-page__link-card">
                 <div className="support-page__link-card-icon">💬</div>
                 <div>
-                  <div className="support-page__link-card-name">Discord Server</div>
-                  <div className="support-page__link-card-desc">50K+ members • Live support</div>
+                  <div className="support-page__link-card-name">{SITE_CONFIG.supportPage.discordCardName}</div>
+                  <div className="support-page__link-card-desc">{SITE_CONFIG.supportPage.discordCardDesc}</div>
                 </div>
                 <ExternalLink size={14} />
               </a>
-              <a href="mailto:support@emperor.gg" className="support-page__link-card">
+              <a href={`mailto:${SITE_CONFIG.links.supportEmail}`} className="support-page__link-card">
                 <div className="support-page__link-card-icon">📧</div>
                 <div>
-                  <div className="support-page__link-card-name">Email Support</div>
-                  <div className="support-page__link-card-desc">support@emperor.gg • &lt; 2h reply</div>
+                  <div className="support-page__link-card-name">{SITE_CONFIG.supportPage.emailCardName}</div>
+                  <div className="support-page__link-card-desc">{SITE_CONFIG.supportPage.emailCardDesc}</div>
                 </div>
                 <ExternalLink size={14} />
               </a>

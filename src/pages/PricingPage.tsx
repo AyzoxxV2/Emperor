@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Check, X, Zap, Crown, ShoppingBag, ExternalLink } from 'lucide-react';
 import { products } from '../data/products';
 import './Pages.scss';
+import { SITE_CONFIG } from '../config/content';
 
 
 const comparisonRows = [
@@ -37,7 +38,7 @@ const PricingPage: React.FC = () => {
   const mainPlans = products.filter(p => [1, 2, 4, 6].includes(p.id));
 
   const handleAdd = (product: any) => {
-    window.open(product.discordUrl || "https://discord.gg/TjXbYS9DZu", "_blank");
+    window.open(product.discordUrl || SITE_CONFIG.links.discord, "_blank");
   };
 
   const getYearlyPrice = (price: number) => (price * 12 * 0.75).toFixed(2);

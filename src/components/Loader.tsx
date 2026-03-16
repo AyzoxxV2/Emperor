@@ -29,10 +29,10 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           <div className="emp-loader__grid" />
           <div className="emp-loader__center">
             <motion.div className="emp-loader__logo" initial={{ opacity: 0, scale: 0.7, y: -20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.34,1.56,0.64,1] }}>
-              <img src="/emperor/avatar.gif" alt="Emperor" className="emp-loader__avatar" />
+              <img src={SITE_CONFIG.brand.avatarGif} alt="Emperor" className="emp-loader__avatar" />
             </motion.div>
             <motion.div className="emp-loader__brand" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-              <img src="/emperor/welcome.png" alt="Welcome" className="emp-loader__welcome-img" />
+              <img src={SITE_CONFIG.brand.welcomeImg} alt="Welcome" className="emp-loader__welcome-img" />
             </motion.div>
             <div className="emp-loader__progress-wrap">
               <div className="emp-loader__bar">

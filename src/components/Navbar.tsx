@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAuthOpen }) => {
     >
       <div className="enav__inner">
         <Link to="/" className="enav__logo">
-          <img src="/emperor/emperor_bot_avatar_ani.gif" alt="Emperor" className="enav__logo-gif" />
+          <img src={SITE_CONFIG.brand.logoGif} alt="Emperor" className="enav__logo-gif" />
           <span className="enav__brand">EMPEROR</span>
         </Link>
 

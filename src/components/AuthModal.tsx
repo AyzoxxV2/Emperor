@@ -77,7 +77,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, mode, onClose, onSwitchMo
       } else {
         // Direct login — OTP disabled until custom domain is configured
         setModalState('success_login');
-        toast.success(cfg.successLogin, { style: toastStyle });
+        toast.success(cfg.login.successMessage, { style: toastStyle });
         await new Promise(r => setTimeout(r, 1000));
         handleClose();
       }
@@ -266,7 +266,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, mode, onClose, onSwitchMo
         email={submittedEmail}
         onSuccess={() => {
           setOtpOpen(false);
-          toast.success(cfg.successLogin, { style: toastStyle });
+          toast.success(cfg.login.successMessage, { style: toastStyle });
           handleClose();
         }}
         onClose={() => setOtpOpen(false)}

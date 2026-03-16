@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import ProductSection from '../components/ProductSection';
 import BottomSections from '../components/BottomSections';
 import { products } from '../data/products';
+import { SITE_CONFIG } from '../config/content';
 
 const Marquee: React.FC = () => (
   <div style={{
@@ -30,7 +31,7 @@ const Marquee: React.FC = () => (
           <span style={{ color: 'rgba(232,168,0,0.3)', fontSize: '0.6em' }}>◆</span>
           <span>SINCE 2025</span>
           <span style={{ color: 'rgba(232,168,0,0.3)', fontSize: '0.6em' }}>◆</span>
-          <span>50K MEMBERS</span>
+          <span>{SITE_CONFIG.marquee.items[0]} — {SITE_CONFIG.marquee.items[3]}</span>
           <span style={{ color: 'rgba(232,168,0,0.3)', fontSize: '0.6em' }}>◆</span>
         </span>
       ))}

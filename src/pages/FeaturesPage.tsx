@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Shield, Cloud, Monitor, Cpu, Wifi, Lock, BarChart2, Settings, Users } from 'lucide-react';
+import { SITE_CONFIG } from '../config/content';
 import './Pages.scss';
 
 const mainFeatures = [
@@ -52,14 +53,7 @@ const mainFeatures = [
   },
 ];
 
-const stats = [
-  { val: '50K+', label: 'Active Members' },
-  { val: '+40%', label: 'Average FPS Gain' },
-  { val: '99.9%', label: 'Platform Uptime' },
-  { val: '500+', label: 'Supported Games' },
-  { val: '< 1s', label: 'Launch Time' },
-  { val: '24/7', label: 'Support Available' },
-];
+const stats = SITE_CONFIG.featuresPage.stats;
 
 const FeaturesPage: React.FC = () => (
   <div className="page">

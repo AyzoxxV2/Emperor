@@ -4,13 +4,14 @@ import { motion } from 'framer-motion';
 import { Check, ShoppingBag, Crown, ExternalLink, Zap, Star } from 'lucide-react';
 import { products, Product } from '../data/products';
 import './Pages.scss';
+import { SITE_CONFIG } from '../config/content';
 
 
 const categories = ['All', 'Launcher', 'Optimizer', 'Cloud', 'Bundle', 'Streaming', 'Lifetime'];
 
 const ProductCard: React.FC<{ product: Product; onAdd: (p: Product) => void }> = ({ product, onAdd }) => {
   const [adding, setAdding] = useState(false);
-  const handleAdd = () => { window.open(product.discordUrl || "https://discord.gg/TjXbYS9DZu", "_blank"); };
+  const handleAdd = () => { window.open(product.discordUrl || SITE_CONFIG.links.discord, "_blank"); };
 
   return (
     <motion.div
@@ -82,7 +83,7 @@ const ProductsPage: React.FC = () => {
   const filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory);
 
   const handleAdd = (product: Product) => {
-    window.open(product.discordUrl || "https://discord.gg/TjXbYS9DZu", "_blank");
+    window.open(product.discordUrl || SITE_CONFIG.links.discord, "_blank");
   };
 
   return (

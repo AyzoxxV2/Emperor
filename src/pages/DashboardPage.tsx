@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Navigate } from 'react-router-dom';
 import { Crown, Zap, Cloud, Shield, ExternalLink, Settings, Download } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { SITE_CONFIG } from '../config/content';
 import './Pages.scss';
 
 const DashboardPage: React.FC = () => {
@@ -79,7 +80,7 @@ const DashboardPage: React.FC = () => {
             <h3><Settings size={18} /> Quick Links</h3>
             <div className="dashboard__links">
               {[
-                { label: 'Discord Server', url: 'https://discord.gg/TjXbYS9DZu', icon: '💬' },
+                
                 { label: 'Documentation', url: '#', icon: '📖' },
                 { label: 'Changelog', url: '#', icon: '📋' },
                 { label: 'Report a Bug', url: '#', icon: '🐛' },

@@ -307,9 +307,9 @@ const VouchersPage: React.FC = () => {
         <motion.div className="page__hero-content"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
         >
-          <div className="badge badge--gold">Verified Reviews</div>
-          <h1 className="display-xl">Customer <span className="gold-text">Vouchers</span></h1>
-          <p>Real reviews from real Emperor members.</p>
+          <div className="badge badge--gold">{SITE_CONFIG.vouchersPage.badge}</div>
+          <h1 className="display-xl">{SITE_CONFIG.vouchersPage.title} <span className="gold-text">{SITE_CONFIG.vouchersPage.titleGold}</span></h1>
+          <p>{SITE_CONFIG.vouchersPage.subtitle}</p>
 
           {/* Stats */}
           <div className="vouchers-page__stats">
@@ -319,11 +319,11 @@ const VouchersPage: React.FC = () => {
             </div>
             <div className="vouchers-page__stat">
               <span className="vouchers-page__stat-val">{vouchers.length}</span>
-              <span className="vouchers-page__stat-label">Verified Reviews</span>
+              <span className="vouchers-page__stat-label">{SITE_CONFIG.vouchersPage.statLabels.totalReviews}</span>
             </div>
             <div className="vouchers-page__stat">
               <span className="vouchers-page__stat-val">100%</span>
-              <span className="vouchers-page__stat-label">Verified Purchases</span>
+              <span className="vouchers-page__stat-label">{SITE_CONFIG.vouchersPage.statLabels.verifiedPurchases}</span>
             </div>
           </div>
         </motion.div>
@@ -351,7 +351,7 @@ const VouchersPage: React.FC = () => {
             </button>
           ) : (
             <div className="vouchers-page__login-notice">
-              <Lock size={13} /> Sign in to leave a review
+              <Lock size={13} /> {SITE_CONFIG.vouchersPage.loginNotice}
             </div>
           )}
         </div>
@@ -377,8 +377,8 @@ const VouchersPage: React.FC = () => {
         ) : filtered.length === 0 ? (
           <div className="vouchers-page__empty">
             <span>⭐</span>
-            <h3>No reviews yet</h3>
-            <p>Be the first to leave a review!</p>
+            <h3>{SITE_CONFIG.vouchersPage.emptyTitle}</h3>
+            <p>{SITE_CONFIG.vouchersPage.emptySubtitle}</p>
           </div>
         ) : (
           <div className="vouchers-page__grid">
