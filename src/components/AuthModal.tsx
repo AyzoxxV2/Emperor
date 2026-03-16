@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Eye, EyeOff, ArrowRight, Lock, Mail, User, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import OTPModal from './OTPModal';
 import { SITE_CONFIG } from '../config/content';
 import toast from 'react-hot-toast';
 import './AuthModal.scss';
@@ -28,6 +29,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, mode, onClose, onSwitchMo
   const [modalState, setModalState] = useState<ModalState>('form');
   const [error, setError] = useState('');
   const [submittedEmail, setSubmittedEmail] = useState('');
+  const [otpOpen, setOtpOpen] = useState(false);
   const [form, setForm] = useState({ username: '', email: '', password: '' });
   const { login, register } = useAuth();
   const isReg = mode === 'register';
@@ -92,6 +94,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, mode, onClose, onSwitchMo
     setForm(f => ({ ...f, [k]: e.target.value }));
 
   return (
+    <>
     <AnimatePresence>
       {isOpen && (
         <motion.div className="auth-overlay"
@@ -255,6 +258,19 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, mode, onClose, onSwitchMo
         </motion.div>
       )}
     </AnimatePresence>
+  );
+      {/* OTP Modal */}
+      <OTPModal
+        isOpen={otpOpen}
+        email={submittedEmail}
+        onSuccess={() => {
+          setOtpOpen(false);
+          toast.success(cfg.successLogin, { style: toastStyle });
+          handleClose();
+        }}
+        onClose={() => setOtpOpen(false)}
+      />
+    </>
   );
 };
 
