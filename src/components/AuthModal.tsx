@@ -75,10 +75,19 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, mode, onClose, onSwitchMo
         setSubmittedEmail(form.email);
         setModalState('pending_email');
       } else {
-        setModalState('success_login');
-        toast.success(cfg.successLogin, { style: toastStyle });
-        await new Promise(r => setTimeout(r, 1000));
-        handleClose();
+        // 2FA: sign out immediately, then send OTP
+        const { supabase } = await import('../lib/supabase');
+        await supabase.auth.signOut();
+        const { error: otpError } = await supabase.auth.signInWithOtp({
+          email: form.email,
+          options: { shouldCreateUser: false }
+        });
+        if (otpError) {
+          setError('Could not send verification code. Try again.');
+          return;
+        }
+        setSubmittedEmail(form.email);
+        setOtpOpen(true);
       }
     } catch (e: any) {
       clearTimeout(timeout);
