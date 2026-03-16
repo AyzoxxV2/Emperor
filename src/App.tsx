@@ -5,12 +5,9 @@ import { Toaster } from 'react-hot-toast';
 import './styles/globals.scss';
 
 import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext';
-import { OrderProvider } from './context/OrderContext';
 
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
-import Cart from './components/Cart';
 import AuthModal from './components/AuthModal';
 
 import HomePage from './pages/HomePage';
@@ -87,13 +84,12 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const InnerApp: React.FC = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
-  const [cartOpen, setCartOpen] = useState(false);
 
   const openAuth = (mode: 'login' | 'register') => { setAuthMode(mode); setAuthOpen(true); };
 
   return (
     <>
-      <Navbar onCartOpen={() => setCartOpen(true)} onAuthOpen={openAuth} />
+      <Navbar onAuthOpen={openAuth} />
 
       <PageWrapper>
         <Routes>
@@ -107,12 +103,6 @@ const InnerApp: React.FC = () => {
           <Route path="*" element={<HomePage />} />
         </Routes>
       </PageWrapper>
-
-      <Cart
-        isOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
-        onAuthOpen={openAuth}
-      />
 
       <AuthModal
         isOpen={authOpen}
@@ -130,9 +120,7 @@ const App: React.FC = () => {
 
   return (
     <AuthProvider>
-      <CartProvider>
-        <OrderProvider>
-          <Cursor />
+      <Cursor />
           <div className="noise-overlay" />
           <Toaster position="bottom-right" />
 
@@ -149,8 +137,7 @@ const App: React.FC = () => {
               </motion.div>
             )}
           </AnimatePresence>
-        </OrderProvider>
-      </CartProvider>
+
     </AuthProvider>
   );
 };

@@ -1,24 +1,21 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, User, Menu, X, Zap, LogOut, Crown } from 'lucide-react';
+import { User, Menu, X, Zap, LogOut, Crown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG } from '../config/content';
 import { useAuth } from '../context/AuthContext';
-import { useCart } from '../context/CartContext';
 import './Navbar.scss';
 
 interface NavbarProps {
-  onCartOpen: () => void;
   onAuthOpen: (mode: 'login' | 'register') => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onCartOpen, onAuthOpen }) => {
+const Navbar: React.FC<NavbarProps> = ({ onAuthOpen }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, logout, isAuthenticated } = useAuth();
-  const { count } = useCart();
   const location = useLocation();
 
   useEffect(() => {
@@ -95,14 +92,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCartOpen, onAuthOpen }) => {
               </button>
             </>
           )}
-          <button className="enav__cart" onClick={onCartOpen}>
-            <ShoppingBag size={15} />
-            {count > 0 && (
-              <motion.span className="enav__cart-badge" key={count} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 400, damping: 12 }}>
-                {count}
-              </motion.span>
-            )}
-          </button>
+
           <button className="btn btn--icon enav__hamburger" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={16} /> : <Menu size={16} />}
           </button>

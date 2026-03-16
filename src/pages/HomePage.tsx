@@ -3,16 +3,7 @@ import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import ProductSection from '../components/ProductSection';
 import BottomSections from '../components/BottomSections';
-import { useCart } from '../context/CartContext';
-import { Product, products } from '../data/products';
-import toast from 'react-hot-toast';
-
-const toastStyle = {
-  background: 'rgba(14,14,14,0.97)', color: '#fff',
-  border: '1px solid rgba(232,168,0,0.35)', backdropFilter: 'blur(12px)',
-  fontFamily: 'Rajdhani, sans-serif', fontSize: '0.9rem',
-  borderRadius: '6px', padding: '12px 18px',
-};
+import { products } from '../data/products';
 
 const Marquee: React.FC = () => (
   <div style={{
@@ -48,20 +39,14 @@ const Marquee: React.FC = () => (
 );
 
 const HomePage: React.FC = () => {
-  const { addToCart } = useCart();
   const productRef = useRef<HTMLDivElement>(null);
-
-  const handleAdd = (product: Product) => {
-    addToCart(product);
-    toast.success(`${product.name} added to cart!`, { icon: product.icon, style: toastStyle, duration: 2000 });
-  };
 
   return (
     <>
       <Hero onShopClick={() => productRef.current?.scrollIntoView({ behavior: 'smooth' })} />
       <Marquee />
       <div ref={productRef}>
-        <ProductSection products={products} onAddToCart={handleAdd} />
+        <ProductSection products={products} />
       </div>
       <BottomSections />
     </>

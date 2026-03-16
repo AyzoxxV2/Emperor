@@ -3,16 +3,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ShoppingBag, Crown, ExternalLink, Zap, Star } from 'lucide-react';
 import { products, Product } from '../data/products';
-import { useCart } from '../context/CartContext';
-import toast from 'react-hot-toast';
 import './Pages.scss';
 
-const toastStyle = {
-  background: 'rgba(14,14,14,0.97)', color: '#fff',
-  border: '1px solid rgba(232,168,0,0.35)', backdropFilter: 'blur(12px)',
-  fontFamily: 'Rajdhani, sans-serif', fontSize: '0.9rem',
-  borderRadius: '6px', padding: '12px 18px',
-};
 
 const categories = ['All', 'Launcher', 'Optimizer', 'Cloud', 'Bundle', 'Streaming', 'Lifetime'];
 
@@ -86,7 +78,6 @@ const ProductCard: React.FC<{ product: Product; onAdd: (p: Product) => void }> =
 
 const ProductsPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
-  const { addToCart } = useCart();
 
   const filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory);
 

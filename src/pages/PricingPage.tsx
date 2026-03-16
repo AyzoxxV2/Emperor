@@ -3,16 +3,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, X, Zap, Crown, ShoppingBag, ExternalLink } from 'lucide-react';
 import { products } from '../data/products';
-import { useCart } from '../context/CartContext';
-import toast from 'react-hot-toast';
 import './Pages.scss';
 
-const toastStyle = {
-  background: 'rgba(14,14,14,0.97)', color: '#fff',
-  border: '1px solid rgba(232,168,0,0.35)', backdropFilter: 'blur(12px)',
-  fontFamily: 'Rajdhani, sans-serif', fontSize: '0.9rem',
-  borderRadius: '6px', padding: '12px 18px',
-};
 
 const comparisonRows = [
   { feature: 'Game Launcher', free: true, pro: true, elite: true },
@@ -41,13 +33,11 @@ const faq = [
 const PricingPage: React.FC = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { addToCart } = useCart();
 
   const mainPlans = products.filter(p => [1, 2, 4, 6].includes(p.id));
 
-  const handleAdd = (product: any) => { if (product.isFree) { window.open("https://discord.gg/TjXbYS9DZu", "_blank"); return; }
-    addToCart(product);
-    toast.success(`${product.name} added to cart!`, { icon: product.icon, style: toastStyle });
+  const handleAdd = (product: any) => {
+    window.open(product.discordUrl || "https://discord.gg/TjXbYS9DZu", "_blank");
   };
 
   const getYearlyPrice = (price: number) => (price * 12 * 0.75).toFixed(2);
@@ -121,7 +111,7 @@ const PricingPage: React.FC = () => {
                 className={`pricing-page__cta ${plan.popular ? 'btn btn--gold' : 'btn btn--outline'}`}
                 onClick={() => handleAdd(plan)}
               >
-                {plan.isFree ? <><ExternalLink size={14} /> Join Discord</> : <><ShoppingBag size={14} /> Get Started</>}
+                <><ExternalLink size={14} /> Buy on Discord</>
               </button>
             </motion.div>
           ))}
