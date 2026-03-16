@@ -56,6 +56,7 @@ export const SITE_CONFIG = {
       { label: 'Features', to: '/features' },
       { label: 'Pricing', to: '/pricing' },
       { label: 'Support', to: '/support' },
+      { label: 'Vouchers', to: '/vouchers' },
     ],
     ctaLabel: 'Get Started',
     signinLabel: 'Sign in',
