@@ -598,3 +598,105 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
 }
+
+// ── Features Page ─────────────────────────────────────────────
+.features-page {
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+
+    @media (max-width: 900px) { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 500px) { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  &__stat {
+    padding: 32px 20px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    &:last-child { border-right: none; }
+  }
+
+  &__stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem; letter-spacing: 0.04em;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-bottom: 80px;
+
+    @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 600px) { grid-template-columns: 1fr; }
+  }
+
+  &__card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    cursor: none;
+
+    &::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+
+    &:hover {
+      border-color: var(--gold-border);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+      &::before { opacity: 1; }
+    }
+  }
+
+  &__card-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold);
+    background: rgba(232,168,0,0.08);
+    border: 1px solid var(--gold-border);
+    border-radius: 3px; padding: 3px 10px;
+    width: fit-content;
+    clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  }
+
+  &__card-icon {
+    width: 52px; height: 52px;
+    background: rgba(232,168,0,0.08);
+    border: 1px solid var(--gold-border);
+    border-radius: var(--r-sm);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  &__card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; letter-spacing: 0.06em;
+    color: var(--text-primary);
+  }
+
+  &__card-desc {
+    font-size: 0.85rem; color: var(--text-secondary);
+    line-height: 1.65; font-weight: 300;
+  }
+}
