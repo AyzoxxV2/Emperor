@@ -6,8 +6,11 @@ import { useInView } from 'react-intersection-observer';
 import { Zap, Shield, Cloud, Headphones, ChevronDown, ArrowRight, Users, ExternalLink, Twitter, Github } from 'lucide-react';
 import './BottomSections.scss';
 
-const featureIcons = [<Zap size={22} />, <Shield size={22} />, <Cloud size={22} />, <Headphones size={22} />];
-const features = SITE_CONFIG.features.items.map((f, i) => ({ ...f, icon: featureIcons[i] }));
+const features = [
+  { icon: <Zap size={22} />, title: 'AIMBOT', desc: 'Our aimbot is special made. It will make you win every game without missing any shot. Fully configurable smoothness.' },
+  { icon: <Shield size={22} />, title: 'ESP', desc: 'See your opponents through walls. A massive advantage — stay undetected with our advanced bypass system.' },
+  { icon: <Headphones size={22} />, title: '24/7 Support', desc: 'Dedicated team on Discord around the clock. Average response time under 2 hours.' },
+];
 
 const testimonials = SITE_CONFIG.testimonials.items;
 

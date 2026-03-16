@@ -53,7 +53,14 @@ const mainFeatures = [
   },
 ];
 
-const stats = SITE_CONFIG.featuresPage.stats;
+const stats = [
+  { val: '50K+', label: 'Active Members' },
+  { val: '100%', label: 'Undetected' },
+  { val: '99.9%', label: 'Platform Uptime' },
+  { val: '5', label: 'Premium Features' },
+  { val: '< 1s', label: 'Launch Time' },
+  { val: '24/7', label: 'Support Available' },
+];
 
 const FeaturesPage: React.FC = () => (
   <div className="page">
