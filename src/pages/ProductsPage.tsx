@@ -10,7 +10,7 @@ const categories = ['All', 'Launcher', 'Optimizer', 'Cloud', 'Bundle', 'Streamin
 
 const ProductCard: React.FC<{ product: Product; onAdd: (p: Product) => void }> = ({ product, onAdd }) => {
   const [adding, setAdding] = useState(false);
-  const handleAdd = () => { if (product.isFree) { window.open(product.discordUrl || "https://discord.gg/TjXbYS9DZu", "_blank"); return; } setAdding(true); onAdd(product); setTimeout(() => setAdding(false), 900); };
+  const handleAdd = () => { window.open(product.discordUrl || "https://discord.gg/TjXbYS9DZu", "_blank"); };
 
   return (
     <motion.div
@@ -82,8 +82,7 @@ const ProductsPage: React.FC = () => {
   const filtered = activeCategory === 'All' ? products : products.filter(p => p.category === activeCategory);
 
   const handleAdd = (product: Product) => {
-    addToCart(product);
-    toast.success(`${product.name} added!`, { icon: product.icon, style: toastStyle });
+    window.open(product.discordUrl || "https://discord.gg/TjXbYS9DZu", "_blank");
   };
 
   return (
