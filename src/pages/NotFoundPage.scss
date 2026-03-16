@@ -1,0 +1,107 @@
+@use '../styles/variables' as *;
+
+.notfound {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: 40px 20px;
+
+  &__grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,168,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,168,0,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+
+  &__glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,168,0,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 24px; text-align: center;
+    max-width: 600px;
+  }
+
+  &__number {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+
+  &__four {
+    font-family: $font-display;
+    font-size: clamp(6rem, 20vw, 14rem);
+    line-height: 0.9;
+    background: linear-gradient(180deg, rgba(232,168,0,0.8) 0%, rgba(184,120,0,0.4) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(0 0 30px rgba(232,168,0,0.3));
+  }
+
+  &__logo-wrap {
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  &__statue {
+    width: clamp(80px, 15vw, 160px);
+    filter: drop-shadow(0 0 20px rgba(232,168,0,0.5));
+    animation: statueFloat 3s ease-in-out infinite;
+  }
+
+  &__badge { margin: 0; }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 0.04em; line-height: 1.1;
+    color: var(--text-primary);
+  }
+
+  &__sub {
+    font-size: 1rem; color: var(--text-secondary);
+    line-height: 1.65; font-weight: 300;
+  }
+
+  &__ctas {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    a { text-decoration: none; }
+  }
+
+  &__cta { padding: 14px 28px; font-size: 0.95rem; }
+
+  // Scan line
+  &__scan-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    margin-top: 16px; opacity: 0.5;
+  }
+
+  &__scan-line {
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    animation: scanPulse 2s ease-in-out infinite;
+  }
+
+  &__scan-text {
+    font-family: $font-mono; font-size: 0.6rem;
+    letter-spacing: 0.15em; color: var(--gold);
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@keyframes statueFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scanPulse {
+  0%,100% { opacity: 0.3; transform: scaleX(0.8); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; } 50% { opacity: 0; }
+}

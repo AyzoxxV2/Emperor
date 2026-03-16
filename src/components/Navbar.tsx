@@ -74,6 +74,11 @@ const Navbar: React.FC<NavbarProps> = ({ onAuthOpen }) => {
                     <Link to="/dashboard" className="enav__user-menu-item" onClick={() => setUserMenuOpen(false)}>
                       <Crown size={14} /> Dashboard
                     </Link>
+                    {user.is_admin && (
+                      <Link to="/admin" className="enav__user-menu-item" onClick={() => setUserMenuOpen(false)} style={{color: 'var(--gold)'}}>
+                        <Zap size={14} /> Admin Panel
+                      </Link>
+                    )}
                     <Link to="/support" className="enav__user-menu-item" onClick={() => setUserMenuOpen(false)}>
                       <Zap size={14} /> Support
                     </Link>

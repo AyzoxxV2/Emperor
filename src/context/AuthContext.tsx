@@ -9,7 +9,8 @@ export interface Profile {
   email: string;
   plan: 'free' | 'pro' | 'elite' | 'lifetime';
   discord_id?: string;
-  avatar: string;      // static bot avatar for now
+  avatar: string;
+  is_admin: boolean;      // static bot avatar for now
   joinedAt: string;    // human-readable join date
   created_at: string;
 }
@@ -36,6 +37,7 @@ const buildProfile = (sbUser: User, data: any): Profile => {
     email: sbUser.email || '',
     plan: data?.plan || 'free',
     discord_id: data?.discord_id,
+    is_admin: data?.is_admin || false,
     avatar: '/emperor/emperor_bot_avatar_ani.gif',
     joinedAt: data?.created_at
       ? new Date(data.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })

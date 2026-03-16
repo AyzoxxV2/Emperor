@@ -17,6 +17,8 @@ import PricingPage from './pages/PricingPage';
 import SupportPage from './pages/SupportPage';
 import DashboardPage from './pages/DashboardPage';
 import VouchersPage from './pages/VouchersPage';
+import AdminPage from './pages/AdminPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // ── Custom Cursor ──────────────────────────────
 const Cursor: React.FC = () => {
@@ -100,7 +102,8 @@ const InnerApp: React.FC = () => {
           <Route path="/support" element={<SupportPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/vouchers" element={<VouchersPage />} />
-          <Route path="*" element={<HomePage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </PageWrapper>
 
