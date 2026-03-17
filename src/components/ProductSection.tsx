@@ -46,12 +46,31 @@ const PricingCard: React.FC<{ product: Product; index: number; isActive: boolean
       <p className="ecard__tagline">{product.tagline}</p>
 
       <div className="ecard__price-wrap">
-        <span className="ecard__price">${product.price.toFixed(2)}</span>
-        <span className="ecard__period">/mo</span>
-        {product.originalPrice && (
-          <span className="ecard__original">${product.originalPrice.toFixed(2)}</span>
+        {product.price === 0 ? (
+          <span className="ecard__price ecard__price--ticket">OPEN TICKET</span>
+        ) : (
+          <>
+            <span className="ecard__price">${product.price.toFixed(2)}</span>
+            <span className="ecard__period">/start</span>
+            {product.originalPrice && (
+              <span className="ecard__original">${product.originalPrice.toFixed(2)}</span>
+            )}
+          </>
         )}
       </div>
+
+      {/* Pricing table */}
+      {product.pricing && product.pricing.length > 0 && product.price !== 0 && (
+        <div className="ecard__pricing">
+          {product.pricing.map(p => (
+            <div key={p.label} className="ecard__pricing-row">
+              <span className="ecard__pricing-label">{p.label}</span>
+              <span className="ecard__pricing-usd">{p.usd}</span>
+              {p.vnd && <span className="ecard__pricing-vnd">{p.vnd}</span>}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="ecard__divider" />
 

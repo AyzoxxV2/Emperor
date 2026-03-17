@@ -264,3 +264,42 @@
     }
   }
 }
+
+// Pricing table
+.ecard__pricing {
+  display: flex; flex-direction: column; gap: 4px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  margin-top: -4px;
+}
+
+.ecard__pricing-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem;
+}
+
+.ecard__pricing-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.08em;
+  color: var(--text-muted); text-transform: uppercase;
+  min-width: 60px;
+}
+
+.ecard__pricing-usd {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.95rem; letter-spacing: 0.04em;
+  color: var(--gold-bright); flex: 1;
+}
+
+.ecard__pricing-vnd {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.ecard__price--ticket {
+  font-size: 1.2rem !important;
+  letter-spacing: 0.08em;
+}
