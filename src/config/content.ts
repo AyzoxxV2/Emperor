@@ -124,7 +124,6 @@ export const SITE_CONFIG = {
     titleGold: 'to dominate',
     items: [
       { icon: '⚡', title: 'Ultra-Fast Launch', desc: 'Launch any game in under a second. Emperor pre-loads your titles and auto-optimizes system resources.' },
-      { icon: '🛡️', title: '3-Year Warranty', desc: 'All products backed by a 3-year guarantee with premium 24/7 support included.' },
       { icon: '☁️', title: 'Cloud Sync', desc: 'Saves backed up automatically. Resume from any PC, anytime, anywhere in the world.' },
       { icon: '🎧', title: '24/7 Support', desc: 'Dedicated team on Discord around the clock. Average response time under 2 hours.' },
     ],
